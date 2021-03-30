@@ -10,9 +10,7 @@ import java.util.List;
 
 import static database.Constants.Tables.*;
 
-/**
- * Created by Alex on 11/03/2017.
- */
+
 public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
 
     private final Connection connection;

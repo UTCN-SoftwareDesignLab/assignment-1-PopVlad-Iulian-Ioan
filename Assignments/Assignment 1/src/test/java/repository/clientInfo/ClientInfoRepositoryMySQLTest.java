@@ -56,6 +56,17 @@ public class ClientInfoRepositoryMySQLTest {
        ClientInfo client=repository.findById ( clientInfos.get ( 0 ).getId () );
        Assert.assertEquals ( "Vlad",client.getName () );
     }
+    @Test
+    public void findByCNP() throws EntityNotFoundException {
+        repository.save(new ClientInfoBuilder()
+                .setName ( "Vlad" )
+                .setAddress ( "Gh Doja" )
+                .setCnp ( "1045264748192" )
+                .build ());
+        List<ClientInfo>clientInfos=repository.findAll ();
+        ClientInfo client=repository.findByCNP ( clientInfos.get ( 0 ).getCnp () );
+        Assert.assertEquals ( "Vlad",client.getName () );
+    }
 
     @Test
     public void save() {

@@ -3,7 +3,9 @@ package service.admin;
 import model.Activity;
 import model.User;
 import repository.EntityNotFoundException;
+import repository.activity.ActivityRepository;
 import repository.activity.ActivityRepositoryMySQL;
+import repository.user.UserRepository;
 import repository.user.UserRepositoryMySQL;
 
 import java.nio.charset.StandardCharsets;
@@ -14,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminServiceImpl implements AdminService{
-    private final UserRepositoryMySQL userRepository;
-    private final ActivityRepositoryMySQL activityRepository;
-    public AdminServiceImpl(UserRepositoryMySQL userRepository,ActivityRepositoryMySQL activityRepository) {
+    private final UserRepository userRepository;
+    private final ActivityRepository activityRepository;
+    public AdminServiceImpl(UserRepository userRepository, ActivityRepository activityRepository) {
         this.userRepository = userRepository;
         this.activityRepository=activityRepository;
     }

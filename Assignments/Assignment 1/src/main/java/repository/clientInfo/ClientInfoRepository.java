@@ -9,6 +9,7 @@ public interface ClientInfoRepository {
     List<ClientInfo> findAll();
 
     ClientInfo findById(Long id) throws EntityNotFoundException;
+    ClientInfo findByCNP(String cnp) throws EntityNotFoundException;
 
     boolean save(ClientInfo clientInfo);
 

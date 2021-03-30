@@ -2,9 +2,7 @@ package database;
 
 import static database.Constants.Tables.*;
 
-/**
- * Created by Alex on 11/03/2017.
- */
+
 public class SQLTableCreationFactory {
 
     public String getCreateSQLForTable(String table) {
@@ -13,8 +11,8 @@ public class SQLTableCreationFactory {
                 return "CREATE TABLE IF NOT EXISTS clientInfo (" +
                         "  id int NOT NULL AUTO_INCREMENT," +
                         "  name varchar(500) NOT NULL," +
-                        "  cnp varchar(13) NOT NULL," +
                         "  address varchar(500) DEFAULT NULL," +
+                        "  cnp varchar(13) NOT NULL," +
                         "  PRIMARY KEY (id)," +
                         "  UNIQUE KEY id_UNIQUE (id)" +
                         ")";
@@ -22,6 +20,7 @@ public class SQLTableCreationFactory {
                 return "CREATE TABLE IF NOT EXISTS clientAccount (" +
                         "  id int NOT NULL AUTO_INCREMENT," +
                         "  idClient int NOT NULL," +
+                        "  idCard int NOT NULL," +
                         "  type varchar(100) NOT NULL," +
                         "  moneyAmount int(11) DEFAULT NULL," +
                         "`creationDate` DATETIME NOT NULL," +

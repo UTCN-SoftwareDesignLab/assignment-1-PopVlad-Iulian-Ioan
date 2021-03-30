@@ -37,4 +37,14 @@ public class ClientInfo {
     public void setCnp(String cnp) {
         this.cnp = cnp;
     }
+
+    @Override
+    public String toString() {
+        return "ClientInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", cnp='" + cnp + '\'' +
+                '}';
+    }
 }

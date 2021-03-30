@@ -1,5 +1,6 @@
 package model.builder;
 
+import DTO.ClientDTO;
 import model.ClientInfo;
 
 public class ClientInfoBuilder {
@@ -22,6 +23,12 @@ public class ClientInfoBuilder {
     }
     public ClientInfoBuilder setCnp(String cnp) {
         clientInfo.setCnp ( cnp );
+        return this;
+    }
+    public ClientInfoBuilder fromClientDTO(ClientDTO clientDTO){
+        clientInfo.setName ( clientDTO.getName () );
+        clientInfo.setAddress ( clientDTO.getAddress () );
+        clientInfo.setCnp ( clientDTO.getCnp () );
         return this;
     }
     public ClientInfo build() {

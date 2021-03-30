@@ -1,8 +1,8 @@
 package model.builder;
 
+import DTO.AccountDTO;
 import model.ClientAccount;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class ClientAccountBuilder {
@@ -19,6 +19,10 @@ public class ClientAccountBuilder {
         clientAccount.setIdClient ( idClient );
         return this;
     }
+    public ClientAccountBuilder setIdCard(Long idCard){
+        clientAccount.setIdCard ( idCard );
+        return this;
+    }
     public ClientAccountBuilder setType(String type) {
         clientAccount.setType ( type );
         return this;
@@ -30,6 +34,12 @@ public class ClientAccountBuilder {
     }
     public ClientAccountBuilder setCreationDate(Date creationDate){
         clientAccount.setCreationDate ( creationDate );
+        return this;
+    }
+    public ClientAccountBuilder fromAccountDTO(AccountDTO accountDTO){
+        clientAccount.setIdCard ( accountDTO.getIdCard () );
+        clientAccount.setType ( accountDTO.getType () );
+        clientAccount.setMoneyAmount ( accountDTO.getMoneyAmount () );
         return this;
     }
     public ClientAccount build(){

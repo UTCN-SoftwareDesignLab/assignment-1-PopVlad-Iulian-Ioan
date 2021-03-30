@@ -15,9 +15,7 @@ import static database.Constants.Roles.ROLES;
 import static database.Constants.Schemas.SCHEMAS;
 import static database.Constants.getRolesRights;
 
-/**
- * Created by Alex on 11/03/2017.
- */
+
 public class Boostraper {
 
     private RightsRolesRepository rightsRolesRepository;

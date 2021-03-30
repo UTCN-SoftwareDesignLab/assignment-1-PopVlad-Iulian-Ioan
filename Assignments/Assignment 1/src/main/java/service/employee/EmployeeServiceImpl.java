@@ -2,17 +2,20 @@ package service.employee;
 
 import model.ClientAccount;
 import model.ClientInfo;
+import repository.EntityNotFoundException;
+import repository.clientAccount.ClientAccountRepository;
 import repository.clientAccount.ClientAccountRepositoryMySQL;
+import repository.clientInfo.ClientInfoRepository;
 import repository.clientInfo.ClientInfoRepositoryMySQL;
 
 import java.util.List;
 
 
 public class EmployeeServiceImpl implements EmployeeService{
-    private final ClientAccountRepositoryMySQL accountRepository;
-    private final ClientInfoRepositoryMySQL clientRepository;
+    private final ClientAccountRepository accountRepository;
+    private final ClientInfoRepository clientRepository;
 
-    public EmployeeServiceImpl(ClientAccountRepositoryMySQL accountRepository,ClientInfoRepositoryMySQL clientRepository) {
+    public EmployeeServiceImpl(ClientAccountRepository accountRepository, ClientInfoRepository clientRepository) {
         this.clientRepository = clientRepository;
         this.accountRepository = accountRepository;
     }
@@ -25,6 +28,16 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public boolean updateClient(ClientInfo clientInfo) {
         return clientRepository.update ( clientInfo );
+    }
+
+    @Override
+    public ClientInfo findByCNP(ClientInfo clientInfo) throws EntityNotFoundException {
+        return clientRepository.findByCNP ( clientInfo.getCnp () );
+    }
+
+    @Override
+    public ClientAccount findByIdCard(Long idCard) throws EntityNotFoundException {
+        return accountRepository.findByIdCard ( idCard );
     }
 
     @Override

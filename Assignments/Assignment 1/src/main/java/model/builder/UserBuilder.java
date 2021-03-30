@@ -1,13 +1,16 @@
 package model.builder;
 
+import DTO.ActivityDTO;
 import model.Role;
 import model.User;
+import repository.security.RightsRolesRepositoryMySQL;
 
+import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Alex on 11/03/2017.
- */
+import static database.Constants.Roles.EMPLOYEE;
+
+
 public class UserBuilder {
 
     private final User user;
@@ -35,10 +38,14 @@ public class UserBuilder {
         user.setRoles(roles);
         return this;
     }
+    public UserBuilder fromActivityDTO(ActivityDTO activityDTO){
+        user.setUsername ( activityDTO.getUsername () );
+        user.setPassword ( activityDTO.getUsername () );
+        return this;
+    }
 
     public User build() {
         return user;
     }
-
 
 }

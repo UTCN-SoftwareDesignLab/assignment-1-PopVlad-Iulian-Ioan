@@ -41,4 +41,13 @@ public class Activity {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", idUser=" + idUser +
+                ", action='" + action + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

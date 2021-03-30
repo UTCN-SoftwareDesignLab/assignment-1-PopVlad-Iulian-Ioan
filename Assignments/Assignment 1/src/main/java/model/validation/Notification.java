@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Alex on 18/03/2017.
- */
+
 public class Notification<T> {
 
     private T result;

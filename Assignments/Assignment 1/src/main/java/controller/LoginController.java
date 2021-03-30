@@ -1,24 +1,33 @@
 package controller;
 
+import model.Role;
 import model.User;
 import model.validation.Notification;
 import service.user.AuthenticationService;
+import view.AdminView;
+import view.EmployeeView;
 import view.LoginView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-/**
- * Created by Alex on 18/03/2017.
- */
+import static database.Constants.Roles.ADMINISTRATOR;
+
+
 public class LoginController {
     private final LoginView loginView;
     private final AuthenticationService authenticationService;
-
-    public LoginController(LoginView loginView, AuthenticationService authenticationService) {
+    private final AdminController adminController;
+    private final EmployeeController employeeController;
+    private static User activeUser;
+    public LoginController(LoginView loginView, AuthenticationService authenticationService,AdminController adminController, EmployeeController employeeController) {
         this.loginView = loginView;
         this.authenticationService = authenticationService;
+        this.adminController=adminController;
+        this.employeeController=employeeController;
         loginView.setLoginButtonListener(new LoginButtonListener());
         loginView.setRegisterButtonListener(new RegisterButtonListener());
     }
@@ -36,7 +45,18 @@ public class LoginController {
                 JOptionPane.showMessageDialog(loginView.getContentPane(), loginNotification.getFormattedErrors());
             } else {
                 JOptionPane.showMessageDialog(loginView.getContentPane(), "Login successful!");
+                loginView.setVisible (false);
+                User user=loginNotification.getResult ();
+                activeUser=user;
+                List<Role> roleList=user.getRoles ();
+                if(roleList.contains ( ADMINISTRATOR )){
+                    adminController.getAdminView ().setVisible ( true );
+                }
+                else {
+                    employeeController.getEmployeeView ().setVisible ( true );
+                }
             }
+
         }
     }
 
@@ -61,5 +81,7 @@ public class LoginController {
         }
     }
 
-
+    public static User getActiveUser() {
+        return activeUser;
+    }
 }

@@ -5,9 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Alex on 08/03/2017.
- */
+
 public class JDBConnectionWrapper {
 
 

@@ -6,9 +6,18 @@ import java.time.LocalDate;
 public class ClientAccount {
     private Long id;
     private Long idClient;
+    private Long idCard;
     private String type;
     private Long moneyAmount;
     private Date creationDate;
+
+    public Long getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(Long idCard) {
+        this.idCard = idCard;
+    }
 
     public String getType() {
         return type;
@@ -48,5 +57,17 @@ public class ClientAccount {
 
     public Date getCreationDate() {
         return creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientAccount{" +
+                "id=" + id +
+                ", idClient=" + idClient +
+                ", idCard=" + idCard +
+                ", type='" + type + '\'' +
+                ", moneyAmount=" + moneyAmount +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }

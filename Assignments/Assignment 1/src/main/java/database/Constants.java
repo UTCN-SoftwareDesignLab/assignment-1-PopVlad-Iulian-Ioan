@@ -5,9 +5,7 @@ import java.util.*;
 import static database.Constants.Rights.*;
 import static database.Constants.Roles.*;
 
-/**
- * Created by Alex on 11/03/2017.
- */
+
 public class Constants {
 
     public static class Schemas {

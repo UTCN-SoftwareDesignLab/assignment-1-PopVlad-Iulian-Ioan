@@ -51,6 +51,23 @@ public class ClientInfoRepositoryMySQL implements ClientInfoRepository{
     }
 
     @Override
+    public ClientInfo findByCNP(String cnp) throws EntityNotFoundException {
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "Select * from clientinfo where cnp=" + cnp;
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next())
+                return getClientInfoFromResultSet (rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @Override
     public boolean save(ClientInfo clientInfo) {
         try {
             PreparedStatement insertStatement = connection
@@ -69,11 +86,10 @@ public class ClientInfoRepositoryMySQL implements ClientInfoRepository{
     @Override
     public boolean update(ClientInfo clientInfo) {
         try {
-            PreparedStatement updateStatement = connection.prepareStatement("UPDATE clientinfo SET name = ?, address = ?, " +
-                    "cnp = ? WHERE id = " + clientInfo.getId());
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE clientinfo SET name = ?, address = ? " +
+                    " WHERE cnp = " + clientInfo.getCnp ());
             updateStatement.setString(1, clientInfo.getName ());
             updateStatement.setString(2, clientInfo.getAddress ());
-            updateStatement.setString(3, clientInfo.getCnp ());
             updateStatement.executeUpdate();
             return true;
         } catch (SQLException e) {

@@ -8,9 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import repository.user.UserRepository;
 
-/**
- * Created by Alex on 11/03/2017.
- */
+
 public class AuthenticationServiceMySQLTest {
 
     public static final String TEST_USERNAME = "test@username.com";

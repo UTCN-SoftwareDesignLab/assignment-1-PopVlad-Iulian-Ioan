@@ -53,12 +53,14 @@ public class EmployeeServiceImplTest {
         accountRepositoryMySQL.save ( new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 0 ).getId () )
                 .setType ( "personal" )
+                .setIdCard ( 12L )
                 .setMoneyAmount ( 300L )
                 .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
                 . build ());
         accountRepositoryMySQL.save ( new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 1 ).getId () )
                 .setType ( "personal" )
+                .setIdCard ( 13L )
                 .setMoneyAmount ( 400L )
                 .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
                 . build ());

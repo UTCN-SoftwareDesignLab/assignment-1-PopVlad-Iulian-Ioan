@@ -52,14 +52,33 @@ public class ClientAccountRepositoryMySQL implements ClientAccountRepository{
     }
 
     @Override
+    public ClientAccount findByIdCard(Long idCard) throws EntityNotFoundException {
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "Select * from ClientAccount where idCard=" + idCard;
+            ResultSet rs = statement.executeQuery(sql);
+
+            if (rs.next()) {
+                return getClientAccountFromResultSet (rs);
+            } else {
+                throw new EntityNotFoundException(idCard, ClientAccount.class.getSimpleName());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new EntityNotFoundException(idCard, ClientAccount.class.getSimpleName());
+        }
+    }
+
+    @Override
     public boolean save(ClientAccount clientAccount) {
         try {
             PreparedStatement insertStatement = connection
-                    .prepareStatement("INSERT INTO ClientAccount values (null, ?, ?, ?, ?)");
+                    .prepareStatement("INSERT INTO ClientAccount values (null, ?, ?, ?, ?, ?)");
             insertStatement.setLong(1, clientAccount.getIdClient ());
-            insertStatement.setString(2, clientAccount.getType ());
-            insertStatement.setLong(3, clientAccount.getMoneyAmount ());
-            insertStatement.setDate ( 4, Date.valueOf ( LocalDate.now() ));
+            insertStatement.setLong ( 2,clientAccount.getIdCard () );
+            insertStatement.setString(3, clientAccount.getType ());
+            insertStatement.setLong(4, clientAccount.getMoneyAmount ());
+            insertStatement.setDate ( 5, Date.valueOf ( LocalDate.now() ));
             insertStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -72,7 +91,7 @@ public class ClientAccountRepositoryMySQL implements ClientAccountRepository{
     public boolean delete(ClientAccount clientAccount) {
         try {
             Statement statement = connection.createStatement();
-            String sql = "DELETE from ClientAccount where id ="+clientAccount.getId ();
+            String sql = "DELETE from ClientAccount where idCard ="+clientAccount.getIdCard ();
             statement.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
@@ -85,7 +104,7 @@ public class ClientAccountRepositoryMySQL implements ClientAccountRepository{
     public boolean update(ClientAccount clientAccount) {
         try {
             PreparedStatement updateStatement = connection.prepareStatement("UPDATE ClientAccount SET idClient = ?, type = ?, " +
-                    "moneyAmount = ?  WHERE id = " + clientAccount.getId());
+                    "moneyAmount = ?  WHERE idCard = " + clientAccount.getIdCard ());
             updateStatement.setLong(1, clientAccount.getIdClient ());
             updateStatement.setString(2, clientAccount.getType ());
             updateStatement.setLong(3, clientAccount.getMoneyAmount ());
@@ -111,6 +130,7 @@ public class ClientAccountRepositoryMySQL implements ClientAccountRepository{
         return new ClientAccountBuilder ()
                 .setId(rs.getLong("id"))
                 .setIdClient (rs.getLong("idClient"))
+                .setIdCard ( rs.getLong ( "idCard" ) )
                 .setType ( rs.getString ( "type" ) )
                 .setMoneyAmount (rs.getLong ("moneyAmount"))
                 .setCreationDate (new Date(rs.getDate("creationDate").getTime()))

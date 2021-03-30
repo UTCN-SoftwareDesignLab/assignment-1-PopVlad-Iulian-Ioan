@@ -50,11 +50,13 @@ public class ClientAccountRepositoryMySQLTest {
         accountRepositoryMySQL.save ( new ClientAccountBuilder ()
         .setIdClient ( clientInfos.get ( 0 ).getId () )
          .setType ( "personal" )
+                .setIdCard ( 12L )
          .setMoneyAmount ( 300L )
           .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
         . build ());
         accountRepositoryMySQL.save ( new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 1 ).getId () )
+                .setIdCard ( 13L )
                 .setType ( "personal" )
                 .setMoneyAmount ( 400L )
                 .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
@@ -74,6 +76,7 @@ public class ClientAccountRepositoryMySQLTest {
         List<ClientInfo>clientInfos=clientInfoRepositoryMySQL.findAll ();
         accountRepositoryMySQL.save ( new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 0 ).getId () )
+                .setIdCard ( 12L )
                 .setType ( "personal" )
                 .setMoneyAmount ( 300L )
                 .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
@@ -82,6 +85,24 @@ public class ClientAccountRepositoryMySQLTest {
         ClientAccount account=accountRepositoryMySQL.findById ( accounts.get ( 0 ).getId () );
         ClientInfo client=clientInfoRepositoryMySQL.findById ( clientInfos.get ( 0 ).getId () );
         Assert.assertEquals ( account.getIdClient (),client.getId () );
+    }
+    @Test
+    public void findByIdCard() throws EntityNotFoundException {
+        clientInfoRepositoryMySQL.save(new ClientInfoBuilder()
+                .setName ( "Vlad" )
+                .setAddress ( "Gh Doja" )
+                .setCnp ( "1045264748192" )
+                .build ());
+        List<ClientInfo>clientInfos=clientInfoRepositoryMySQL.findAll ();
+        accountRepositoryMySQL.save ( new ClientAccountBuilder ()
+                .setIdClient ( clientInfos.get ( 0 ).getId () )
+                .setIdCard ( 12L )
+                .setType ( "personal" )
+                .setMoneyAmount ( 300L )
+                .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
+                . build ());
+        ClientAccount account=accountRepositoryMySQL.findByIdCard ( 12L );
+        Assert.assertEquals(12L,(long)account.getIdCard (  ));
     }
 
     @Test
@@ -94,6 +115,7 @@ public class ClientAccountRepositoryMySQLTest {
         List<ClientInfo> clientInfos=clientInfoRepositoryMySQL.findAll ();
         ClientAccount clientAccount= new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 0 ).getId () )
+                .setIdCard ( 12L )
                 .setType ( "personal" )
                 .setMoneyAmount ( 300L )
                 . build ();
@@ -111,6 +133,7 @@ public class ClientAccountRepositoryMySQLTest {
         List<ClientInfo> clientInfos=clientInfoRepositoryMySQL.findAll ();
        accountRepositoryMySQL.save ( new ClientAccountBuilder ()
                .setIdClient ( clientInfos.get ( 0 ).getId () )
+               .setIdCard ( 12L )
                .setType ( "personal" )
                .setMoneyAmount ( 300L )
                .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
@@ -131,6 +154,7 @@ public class ClientAccountRepositoryMySQLTest {
         List<ClientInfo> clientInfos=clientInfoRepositoryMySQL.findAll ();
         ClientAccount clientAccount= new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 0 ).getId () )
+                .setIdCard ( 12L )
                 .setType ( "personal" )
                 .setMoneyAmount ( 300L )
                 .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
@@ -153,6 +177,7 @@ public class ClientAccountRepositoryMySQLTest {
         List<ClientInfo> clientInfos=clientInfoRepositoryMySQL.findAll ();
         ClientAccount clientAccount= new ClientAccountBuilder ()
                 .setIdClient ( clientInfos.get ( 0 ).getId () )
+                .setIdCard ( 12L )
                 .setType ( "personal" )
                 .setMoneyAmount ( 300L )
                 .setCreationDate ( java.sql.Date.valueOf(LocalDate.now()))
